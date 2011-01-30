@@ -2,8 +2,8 @@
 
 Summary:	Audio grabber tool for CD-ROM drives based on KDE 4
 Name:		audex
-Version:	0.71b5
-Release:	%mkrel 3
+Version:	0.74b1
+Release:	%mkrel 1
 License:	GPLv3
 Group:		Sound
 URL:		http://opensource.maniatek.de/audex/
@@ -49,7 +49,7 @@ Some features are:
 #--------------------------------------------------------------------
 
 %prep
-%setup -q -n %name
+%setup -q
 %{__cp} %{SOURCE1} po
 
 %build
