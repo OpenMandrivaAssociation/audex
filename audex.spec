@@ -1,7 +1,7 @@
 Summary:		Audio grabber tool for CD-ROM drives based on KDE 4
 Name:		audex
 Version:		0.74b1
-Release:		1
+Release:		2
 License:		GPLv3
 Group:		Sound
 URL:		http://kde.maniatek.com/audex/
@@ -12,7 +12,7 @@ Requires(post):	desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires:	kdelibs4-devel 
 BuildRequires:	phonon-devel
-BuildRequires:	libcdda-devel
+BuildRequires:	cdda-devel
 BuildRequires:	automoc4
 BuildRequires:	python-eyed3
 BuildRequires:	libkcddb-devel >= 4.9
@@ -60,7 +60,6 @@ export CFLAGS="%{optflags} -fno-strict-aliasing" CXXFLAGS="%{optflags} -fno-stri
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std -C build
 
 %find_lang %{name} --with-html
