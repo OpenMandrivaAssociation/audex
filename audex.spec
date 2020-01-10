@@ -52,7 +52,7 @@ Some features are:
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing" CXXFLAGS="%{optflags} -fno-strict-aliasing"
