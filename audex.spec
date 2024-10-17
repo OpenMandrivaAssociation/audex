@@ -4,7 +4,7 @@ Version:		0.74b1
 Release:		3
 License:		GPLv3
 Group:		Sound
-URL:		http://kde.maniatek.com/audex/
+URL:		https://kde.maniatek.com/audex/
 Source0:		http://kde.maniatek.com/audex/files/%{name}-%{version}.tar.bz2
 Patch0:		audex-0.74b1-fix-lseek-not-declared.patch
 Requires:	kdebase4-runtime
