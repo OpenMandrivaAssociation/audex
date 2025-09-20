@@ -1,22 +1,35 @@
-Summary:		Audio grabber tool for CD-ROM drives based on KDE 4
+Summary:	Audio grabber tool for CD-ROM drives based on KDE 4
 Name:		audex
-Version:		0.74b1
-Release:		3
-License:		GPLv3
+Version:	25.08.1
+Release:	1
+License:	GPLv3
 Group:		Sound
-URL:		https://kde.maniatek.com/audex/
-Source0:		http://kde.maniatek.com/audex/files/%{name}-%{version}.tar.bz2
-Patch0:		audex-0.74b1-fix-lseek-not-declared.patch
-Requires:	kdebase4-runtime
-Requires(post):	desktop-file-utils
-Requires(postun): desktop-file-utils
-BuildRequires:	kdelibs4-devel 
-BuildRequires:	phonon-devel
-BuildRequires:	cdda-devel
-BuildRequires:	automoc4
-BuildRequires:	python-eyed3
-BuildRequires:	libkcddb-devel >= 4.9
-BuildRequires:	libkcompactdisc-devel >= 4.9
+URL:		https://invent.kde.org/multimedia/audex
+Source0:	https://download.kde.org/stable/release-service/%{version}/src/audex-%{version}.tar.xz
+BuildSystem:	cmake
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+BuildRequires:	cmake(KCddb6)
+BuildRequires:	cmake(KF6ColorScheme)
+BuildRequires:	cmake(KF6Completion)
+BuildRequires:	cmake(KF6Config)
+BuildRequires:	cmake(KF6ConfigWidgets)
+BuildRequires:	cmake(KF6CoreAddons)
+BuildRequires:	cmake(KF6Crash)
+BuildRequires:	cmake(KF6I18n)
+BuildRequires:	cmake(KF6KCMUtils)
+BuildRequires:	cmake(KF6KIO)
+BuildRequires:	cmake(KF6Solid)
+BuildRequires:	cmake(KF6KCMUtils)
+BuildRequires:	cmake(KF6TextWidgets)
+BuildRequires:	cmake(KF6WidgetsAddons)
+BuildRequires:	cmake(KF6XmlGui)
+BuildRequires:	cmake(Qt6Core)
+BuildRequires:	cmake(Qt6DBus)
+BuildRequires:	cmake(Qt6Gui)
+BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Xml)
+BuildRequires:	pkgconfig(libcdio_cdda)
+BuildRequires:	pkgconfig(libcdio_paranoia)
 
 %description
 Audex is a new audio grabber tool for CD-ROM drives based on KDE 4.
@@ -37,60 +50,10 @@ Some features are:
 * Creates extraction and encoding protocols.
 * Transfer files with KDE KIO-Slaves.
 
-
 %files -f %{name}.lang
-%doc CHANGELOG LICENCE README TODO
-%{_kde_bindir}/%{name}
-%{_kde_datadir}/applications/kde4/%{name}*.desktop
-%{_kde_datadir}/apps/solid/actions/%{name}*.desktop
-%{_kde_datadir}/apps/%{name}
-# This is useless: already listed by %find_lang
-#{_kde_datadir}/locale/*/LC_MESSAGES/%{name}.mo
-%{_kde_iconsdir}/hicolor/*/*/*.png
-
-#--------------------------------------------------------------------
-
-%prep
-%setup -q
-%autopatch -p1
-
-%build
-export CFLAGS="%{optflags} -fno-strict-aliasing" CXXFLAGS="%{optflags} -fno-strict-aliasing"
-%cmake_kde4
-%make
-
-%install
-%makeinstall_std -C build
-
-%find_lang %{name} --with-html
-
-
-%changelog
-* Wed Oct 10 2012 Giovanni Mariani <mc2374@mclink.it> 0.74b1-1
-- Removed Source1: from release 0.73 it is integrated in the source tarball
-- Removed unused %%define
-- Removed BuildRoot, defattr, %%clean section and %%mkrel
-- Updated URL tag
-- Made sure the Description text wraps at 76th char and corrected some typos
-- Added some docs (it makes rpmlint happy)
-- Replaced BReq for now-removed kdemultimedia4-devel with the actual needed
-  devel packages (libkcddb and libkcompactdisk)
-- Disable strict aliasing error to fix build
-- Added P0 to unbroke the build another time
-
-* Sun Jan 30 2011 Bruno Cornec <bcornec@mandriva.org> 0.74b1-1mdv2011.0
-+ Revision: 634338
-- Update audex to upstream 0.74b1
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - the mass rebuild of 2010.0 packages
-
-* Wed Oct 21 2009 Anne Nicolas <ennael@mandriva.org> 0.71b5-2mdv2010.0
-+ Revision: 458547
-- fix group
-
-* Sat Jul 04 2009 Bruno Cornec <bcornec@mandriva.org> 0.71b5-1mdv2010.0
-+ Revision: 392038
-- Import audex 0.71b5
-- create audex
-
+%{_bindir}/audex
+%{_datadir}/applications/org.kde.audex.desktop
+%{_datadir}/audex
+%{_datadir}/icons/hicolor/scalable/apps/org.kde.audex.svg
+%{_datadir}/metainfo/org.kde.audex.appdata.xml
+%{_datadir}/solid/actions/audex-rip-audiocd.desktop
