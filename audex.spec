@@ -1,6 +1,6 @@
 Summary:	Audio grabber tool for CD-ROM drives based on KDE 4
 Name:		audex
-Version:	26.04.3
+Version:	26.08.0
 Release:	1
 License:	GPLv3
 Group:		Sound
